@@ -12,4 +12,20 @@ import java.awt.Image;
 
 public interface Piece {
 
-    public abstract Location getLocation();
+    /**
+     * Gets the possible moves for this Piece.
+     */
+    public abstract Square[] getPossibleMoves();
+
+    /**
+     * Get the Rank of this Piece.
+     */
+    public String getRank();
+
+    /**
+     * Move to a Square on the Board.
+     */
+    public abstract boolean moveTo(Square square);
+
+}
+    
