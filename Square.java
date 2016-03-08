@@ -13,6 +13,7 @@ public class Square {
 
     private Location location;
     private Piece piece;
+    private Square adjacentSquare;
     private boolean occupied;
 
     public boolean equals(Square square) {
