@@ -36,6 +36,7 @@ public class iChess extends WindowController {
         Square[NUMBER_LINES][NUMBER_LINES];
 
     // Pieces
+    private static final String WHITE = "white", BLACK = "black";
     private static final int NUM_UNIQUE_IMAGES = 12;
     private static final String[] rankGraphics = {"Pawn.png", "Knight.png",
         "Bishop.png", "Rook.png", "Queen.png", "King.png"};
@@ -51,6 +52,7 @@ public class iChess extends WindowController {
         instantiateSquares();
 
         // Set the pieces for the start of the game
+        storeImages();
         setPieces();
         
     }
@@ -106,11 +108,30 @@ public class iChess extends WindowController {
     }
 
     public void setPieces() {
-
-        pieceImageArray[0] = getImage("whitePawn.png");
+        
+        // Set the pieces on the board
         Piece pawn = new Pawn("white", squareArray[3][3], pieceImageArray[0],
                 canvas);
     }
+
+    public void storeImages() {
+
+        String pieceColor = WHITE;
+        int rankGraphicsIndex = 0;
+
+        // Store the piece images
+        for (int i = 0; i < pieceImageArray.length; i++) {
+
+            pieceImageArray[i] = getImage(pieceColor +
+                    rankGraphics[rankGraphicsIndex]);            
+            if (i % 2 == 1) rankGraphicsIndex++;
+
+            // Change the piece colors halfway through the iteration
+            if (i == 5) pieceColor = BLACK;
+        }
+    }
+
+
 
         
 
