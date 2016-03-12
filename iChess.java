@@ -52,7 +52,7 @@ public class iChess extends WindowController {
         instantiateSquares();
 
         // Set the pieces for the start of the game
-        storeImages();
+        storePieceImages();
         setPieces();
         
     }
@@ -102,19 +102,21 @@ public class iChess extends WindowController {
                 thisSquare.setID(currentFile + currentRank);
                 shade = !shade;
             }
-
-            // Next: get Pawn graphics in and put them in as pieces!
         }
     }
 
     public void setPieces() {
         
         // Set the pieces on the board
-        Piece pawn = new Pawn("white", squareArray[3][3], pieceImageArray[0],
-                canvas);
+        for (int i = 0; i < 8; i++) {
+            Piece piece = new Pawn(WHITE, squareArray[i][1],
+                    pieceImageArray[0], canvas);
+            Piece piece2 = new Pawn(BLACK, squareArray[i][6],
+                    pieceImageArray[6], canvas);
+        }
     }
 
-    public void storeImages() {
+    public void storePieceImages() {
 
         String pieceColor = WHITE;
         int rankGraphicsIndex = 0;
@@ -124,10 +126,15 @@ public class iChess extends WindowController {
 
             pieceImageArray[i] = getImage(pieceColor +
                     rankGraphics[rankGraphicsIndex]);            
-            if (i % 2 == 1) rankGraphicsIndex++;
+            rankGraphicsIndex++;
+            
 
             // Change the piece colors halfway through the iteration
-            if (i == 5) pieceColor = BLACK;
+            if (i == 5) {
+                pieceColor = BLACK;
+                rankGraphicsIndex = 0;
+            }
+
         }
     }
 
