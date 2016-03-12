@@ -29,9 +29,8 @@ public class Square {
         
         setLocation(initLocation);
 
-        if (shaded) {
-            squareRect.setColor(LIGHT_GRAY);
-        }
+        if (shaded) squareRect.setColor(Color.LIGHT_GRAY);
+        else squareRect.setColor(Color.WHITE);
     }
 
     public boolean equals(Square square) {

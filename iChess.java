@@ -61,15 +61,27 @@ public class iChess extends WindowController {
     public void instantiateSquares() {
 
         String currentFile, currentRank;
+        Square thisSquare;
+        double squareIncrementX, squareIncrementY;
+        Location squareLocation;
+        boolean shade = false;
 
         // Instantiate the Squares
         for (int j = 0; j < boardFiles.length; j++) {
 
             currentFile = boardFiles[j];
+            squareIncrementX = j * SQUARE_WIDTH;
+            shade = !shade;
 
             for (int k = 0; k < boardRanks.length; k++) {
 
-                squareArray[j][k] = new Square();
+                System.out.println("j: " + j + ", k: " + k);
+                squareIncrementY = CANVAS_HEIGHT - ((k+1) * SQUARE_WIDTH);
+                squareLocation = new Location(squareIncrementX,
+                        squareIncrementY);
+                thisSquare = new Square(squareLocation, shade, canvas);
+                squareArray[j][k] = thisSquare;
+                shade = !shade;
             }
         }
     }

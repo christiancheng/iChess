@@ -20,7 +20,7 @@ public interface Piece {
     /**
      * Get the Location on the canvas of this Piece.
      */
-    public abstract getLocation();
+    //public abstract getLocation();
 
     /**
      * Gets the name of this Piece.
