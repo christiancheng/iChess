@@ -38,9 +38,23 @@ public class iChess extends WindowController {
     // Pieces
     private static final String WHITE = "white", BLACK = "black";
     private static final int NUM_UNIQUE_IMAGES = 12;
-    private static final String[] rankGraphics = {"Pawn.png", "Knight.png",
+    private static final int NUM_TOTAL_PIECES = 32;
+    private static final int PIECES_PER_ROW = 8;
+    private static final int NUM_KNIGHTS = 2;
+
+    private static final int PAWN_INDEX = 0;
+    private static final int KNIGHT_INDEX = 1;
+    private static final int BISHOP_INDEX = 2;
+    private static final int ROOK_INDEX = 3;
+    private static final int QUEEN_INDEX = 4;
+    private static final int KING_INDEX = 5;
+    private static final int BLACK_OFFSET = 6;
+    private static final String[] RANK_GRAPHICS = {"Pawn.png", "Knight.png",
         "Bishop.png", "Rook.png", "Queen.png", "King.png"};
+    private static final int[] SECOND_ROW_ORDER = {3, 1, 2, 4, 5, 2, 1, 3}; 
     private Image[] pieceImageArray = new Image[NUM_UNIQUE_IMAGES];
+    private Piece[] blackPieces = new Piece[NUM_TOTAL_PIECES / 2];
+    private Piece[] whitePieces = new Piece[NUM_TOTAL_PIECES / 2];
 
     /**
      * On begin, draw the chessboard and side board.
@@ -106,14 +120,27 @@ public class iChess extends WindowController {
     }
 
     public void setPieces() {
-        
-        // Set the pieces on the board
-        for (int i = 0; i < 8; i++) {
-            Piece piece = new Pawn(WHITE, squareArray[i][1],
-                    pieceImageArray[0], canvas);
-            Piece piece2 = new Pawn(BLACK, squareArray[i][6],
-                    pieceImageArray[6], canvas);
+
+        // Set the pieces on the board, starting with Pawns
+        for (int i = 0; i < PIECES_PER_ROW; i++) {
+            whitePieces[i] = new Pawn(WHITE, squareArray[i][1],
+                    pieceImageArray[PAWN_INDEX], canvas);
+            blackPieces[i] = new Pawn(BLACK, squareArray[i][6],
+                    pieceImageArray[PAWN_INDEX + BLACK_OFFSET], canvas);
         }
+
+        // Set Rooks on the board
+        whitePieces[8] = new Rook(WHITE, squareArray[0][0],
+                pieceImageArray[ROOK_INDEX], canvas);
+        whitePieces[15] = new Rook(WHITE, squareArray[7][0],
+                pieceImageArray[ROOK_INDEX], canvas);
+        blackPieces[8] = new Rook(BLACK, squareArray[0][7],
+                pieceImageArray[ROOK_INDEX + BLACK_OFFSET], canvas);
+        blackPieces[15] = new Rook(BLACK, squareArray[7][7],
+                pieceImageArray[ROOK_INDEX + BLACK_OFFSET], canvas);
+
+
+
     }
 
     public void storePieceImages() {
@@ -125,16 +152,12 @@ public class iChess extends WindowController {
         for (int i = 0; i < pieceImageArray.length; i++) {
 
             pieceImageArray[i] = getImage(pieceColor +
-                    rankGraphics[rankGraphicsIndex]);            
+                    RANK_GRAPHICS[rankGraphicsIndex % 6]);            
             rankGraphicsIndex++;
-            
 
             // Change the piece colors halfway through the iteration
-            if (i == 5) {
-                pieceColor = BLACK;
-                rankGraphicsIndex = 0;
-            }
-
+            if (i == 5) pieceColor = BLACK;
+          
         }
     }
 
