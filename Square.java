@@ -20,7 +20,7 @@ public class Square {
     private Square adjacentSquare;
     private boolean occupied;
     private FilledRect squareRect;
-    private String file, rank;
+    private String id;
 
     public Square(Location initLocation, boolean shaded, DrawingCanvas canvas)
     {
@@ -36,6 +36,10 @@ public class Square {
     public boolean equals(Square square) {
         return (location == square.getLocation()) ? true : false;
     }
+
+    public String getID() {
+        return id;
+    }
     
     public Location getLocation() {
         return location;
@@ -49,8 +53,8 @@ public class Square {
         return piece;
     }
 
-    public void setFile(String fileToSet) {
-        file = fileToSet;
+    public void setID(String idToSet) {
+        id = idToSet;
     }
 
     public void setLocation(Location locationToSet) {
@@ -64,10 +68,5 @@ public class Square {
     public void setPiece(Piece pieceToSet) {
         piece = pieceToSet;
     }
-
-    public void setRank(String rankToSet) {
-        rank = rankToSet;
-    }
-
 
 }

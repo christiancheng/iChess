@@ -75,12 +75,18 @@ public class iChess extends WindowController {
 
             for (int k = 0; k < boardRanks.length; k++) {
 
-                System.out.println("j: " + j + ", k: " + k);
+                // Calculate rank and Location of this Square
+                currentRank = boardRanks[k];
                 squareIncrementY = CANVAS_HEIGHT - ((k+1) * SQUARE_WIDTH);
                 squareLocation = new Location(squareIncrementX,
                         squareIncrementY);
+                
+                // Initialize the Square and add it to the squareArray
                 thisSquare = new Square(squareLocation, shade, canvas);
                 squareArray[j][k] = thisSquare;
+
+                // Set this Square's properties
+                thisSquare.setID(currentFile + currentRank);
                 shade = !shade;
             }
         }
