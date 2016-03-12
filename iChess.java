@@ -26,10 +26,25 @@ public class iChess extends WindowController {
     private static Line[] horizLines = new Line[NUMBER_LINES];
     private static Line[] vertLines = new Line[NUMBER_LINES];
 
+    // Squares
+    private static final String[] boardFiles = {"A", "B", "C", "D", "E", "F",
+        "G", "H"};
+    private static final String[] boardRanks = {"1", "2", "3", "4", "5", "6",
+        "7", "8"};
+    private static Square[][] squareArray = new
+        Square[NUMBER_LINES][NUMBER_LINES];
+
     /**
      * On begin, draw the chessboard and side board.
      */
     public void begin() {
+
+        drawBoard();
+        instantiateSquares();
+        
+    }
+
+    public void drawBoard() {
 
         double lineIncrement = SQUARE_WIDTH;
 
@@ -42,6 +57,25 @@ public class iChess extends WindowController {
                     CANVAS_HEIGHT, canvas);
         }
     }
+    
+    public void instantiateSquares() {
+
+        String currentFile, currentRank;
+
+        // Instantiate the Squares
+        for (int j = 0; j < boardFiles.length; j++) {
+
+            currentFile = boardFiles[j];
+
+            for (int k = 0; k < boardRanks.length; k++) {
+
+                squareArray[j][k] = new Square();
+            }
+        }
+    }
+
+        
+
 
 
 
