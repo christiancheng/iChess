@@ -4,7 +4,7 @@
 */
 
 import objectdraw.*;
-import java.awt.Image;
+import java.awt.*;
 
 /**
  * Piece interface allows interaction and manipulation of Piece objects.
@@ -30,7 +30,7 @@ public interface Piece {
     /**
      * Gets the possible moves for this Piece.
      */
-    public abstract Square[] getPossibleMoves();
+    //public abstract Square[] getPossibleMoves();
 
     /**
      * Get the Rank of this Piece.
@@ -45,17 +45,17 @@ public interface Piece {
     /**
      * Move to a Square on the Board.
      */
-    public abstract boolean moveTo(Square square);
+    //public abstract boolean moveTo(Square square);
 
     /**
      * Remove this Piece from play.
      */
-    public abstract void removeFromBoard();
+    //public abstract void removeFromBoard();
 
     /**
      * Set the name of this Piece.
      */
-    public abstract void setName();
+    public abstract void setName(String nameToSet);
 
 }
     

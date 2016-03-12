@@ -13,7 +13,7 @@ import java.awt.*;
 public class Square {
 
     // Dimensions
-    private static final double SQUARE_WIDTH = 80;
+    private static final double SQUARE_WIDTH = 70;
 
     private Location location;
     private Piece piece;

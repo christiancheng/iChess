@@ -12,11 +12,12 @@ import javax.swing.event.*;
 public class iChess extends WindowController {
 
     // Dimensions
-    private static final int CANVAS_WIDTH = 800;
-    private static final int CANVAS_HEIGHT = 640;
+    private static final int CANVAS_WIDTH = 720;
+    private static final int CANVAS_HEIGHT = 560;
     private static final int NUMBER_LINES = 8;
-    private static final int SQUARE_WIDTH = 80;
-    private static final int BOARD_WIDTH = 640;
+    private static final int BOARD_WIDTH = 560;
+    private static final int SQUARE_WIDTH = BOARD_WIDTH / NUMBER_LINES;
+    
 
     // GUI components
     private JPanel scorePanel;
@@ -34,13 +35,23 @@ public class iChess extends WindowController {
     private static Square[][] squareArray = new
         Square[NUMBER_LINES][NUMBER_LINES];
 
+    // Pieces
+    private static final int NUM_UNIQUE_IMAGES = 12;
+    private static final String[] rankGraphics = {"Pawn.png", "Knight.png",
+        "Bishop.png", "Rook.png", "Queen.png", "King.png"};
+    private Image[] pieceImageArray = new Image[NUM_UNIQUE_IMAGES];
+
     /**
      * On begin, draw the chessboard and side board.
      */
     public void begin() {
 
+        // Draw the Chessboard and instantiate each Square
         drawBoard();
         instantiateSquares();
+
+        // Set the pieces for the start of the game
+        setPieces();
         
     }
 
@@ -77,7 +88,7 @@ public class iChess extends WindowController {
 
                 // Calculate rank and Location of this Square
                 currentRank = boardRanks[k];
-                squareIncrementY = CANVAS_HEIGHT - ((k+1) * SQUARE_WIDTH);
+                squareIncrementY = BOARD_WIDTH - ((k+1) * SQUARE_WIDTH);
                 squareLocation = new Location(squareIncrementX,
                         squareIncrementY);
                 
@@ -89,7 +100,16 @@ public class iChess extends WindowController {
                 thisSquare.setID(currentFile + currentRank);
                 shade = !shade;
             }
+
+            // Next: get Pawn graphics in and put them in as pieces!
         }
+    }
+
+    public void setPieces() {
+
+        pieceImageArray[0] = getImage("whitePawn.png");
+        Piece pawn = new Pawn("white", squareArray[3][3], pieceImageArray[0],
+                canvas);
     }
 
         
