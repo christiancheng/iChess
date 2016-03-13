@@ -208,14 +208,16 @@ public class iChess extends WindowController {
         // TODO
         int pieceIndex = 8;
         // Figure out which square to assign which piece 
+        // 0-8, 1-9, 2-10, 3-11, 4-12, 5-13, 6-14, 7-15
 
 
         // Assign Pieces to each square
-        for (int j = 0; j < 6; j++) {
+        for (int j = 0; j < 8; j++) {
             squareArray[j][ROW_1].setPiece(whitePieces[pieceIndex]);
             squareArray[j][ROW_8].setPiece(blackPieces[pieceIndex]);
             pieceIndex++;
         }
+
     }
 
         
