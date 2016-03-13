@@ -5,6 +5,7 @@
 
 import objectdraw.*;
 import java.awt.*;
+import java.util.*;
 
 /**
  * Pawn implements a Piece with the rank of Pawn.
@@ -14,6 +15,8 @@ public class Pawn implements Piece {
 
     private static final String RANK = "PAWN";
     private static final String PIECE_PNG = "Pawn.png";
+    private static final String WHITE = "white";
+    private static final String BLACK = "black";
     private static final int DIMENSION = 70;
     
     private String name, color;
@@ -53,8 +56,33 @@ public class Pawn implements Piece {
         return name;
     }
 
-    //public Square[] getPossibleMoves() {
-    //}
+    public Square[] getPossibleMoves(String squareID, String pieceColor) {
+
+        char squareFile, squareRank;
+        ArrayList<String> possibleMoveIds = new ArrayList<String>();
+
+        squareFile = squareID.charAt(0);
+        squareRank = squareID.charAt(1);
+
+        if (pieceColor == WHITE) {
+
+            // Should be upranking later
+            if (squareRank == '8') return null;
+
+            possibleMoveIds.add((squareFile + (char)((int)(squareRank)
+                            + 1)) + "");
+
+        }
+
+        Square[] possibleMoves = new Square[possibleMoveIds.size()];
+
+        for (int i = 0; i < possibleMoves.length; i++) {
+
+            possibleMoves[i] = iChess.getSquare(possibleMoveIds.get(i));
+        }
+
+        return possibleMoves;
+    }
 
     public String getRank() {
         return RANK;

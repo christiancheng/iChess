@@ -17,6 +17,8 @@ public interface Piece {
      */
     public abstract boolean contains(Location point);
 
+    public abstract String getColor();
+
     /**
      * Get the Location on the canvas of this Piece.
      */
@@ -30,7 +32,8 @@ public interface Piece {
     /**
      * Gets the possible moves for this Piece.
      */
-    //public abstract Square[] getPossibleMoves();
+    public abstract Square[] getPossibleMoves(String squareID, String
+            pieceColor);
 
     /**
      * Get the Rank of this Piece.

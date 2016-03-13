@@ -87,6 +87,24 @@ public class iChess extends WindowController {
                     CANVAS_HEIGHT, canvas);
         }
     }
+
+    public static Square getSquare(String squareID) {
+
+        int currentFile = 0;
+
+        while (currentFile++ < NUMBER_LINES) {
+
+            for (int i = 0; i < NUMBER_LINES; i++) {
+                if ((squareArray[currentFile][i].getID()).equals(squareID)) {
+                    return squareArray[currentFile][i];
+                }
+            }
+        }
+
+        return null;
+    }
+
+            
     
     public void instantiateSquares() {
 
@@ -124,12 +142,20 @@ public class iChess extends WindowController {
 
     public void setPieces() {
 
+        setDefaultPieces();
+
+    }
+
+    public void setDefaultPieces() {
+
         // Set the pieces on the board, starting with Pawns
         for (int i = 0; i < PIECES_PER_ROW; i++) {
             whitePieces[i] = new Pawn(WHITE, squareArray[i][ROW_2],
                     pieceImageArray[PAWN_INDEX], canvas);
             blackPieces[i] = new Pawn(BLACK, squareArray[i][ROW_7],
                     pieceImageArray[PAWN_INDEX + BLACK_OFFSET], canvas);
+            squareArray[i][ROW_2].setPiece(whitePieces[i]);
+            squareArray[i][ROW_7].setPiece(blackPieces[i]);
         }
 
         // Set Rooks on the board
@@ -141,6 +167,10 @@ public class iChess extends WindowController {
                 pieceImageArray[ROOK_INDEX + BLACK_OFFSET], canvas);
         blackPieces[15] = new Rook(BLACK, squareArray[7][ROW_8],
                 pieceImageArray[ROOK_INDEX + BLACK_OFFSET], canvas);
+        squareArray[0][ROW_1].setPiece(whitePieces[8]);
+        squareArray[7][ROW_1].setPiece(whitePieces[15]);
+        squareArray[0][ROW_8].setPiece(blackPieces[8]);
+        squareArray[7][ROW_8].setPiece(blackPieces[15]);
 
         // Set Knights on the board
         whitePieces[9] = new Knight(WHITE, squareArray[1][ROW_1],
@@ -175,10 +205,20 @@ public class iChess extends WindowController {
         blackPieces[12] = new King(BLACK, squareArray[4][ROW_8],
                 pieceImageArray[KING_INDEX + BLACK_OFFSET], canvas);
 
+        // TODO
+        int pieceIndex = 8;
+        // Figure out which square to assign which piece 
 
 
-
+        // Assign Pieces to each square
+        for (int j = 0; j < 6; j++) {
+            squareArray[j][ROW_1].setPiece(whitePieces[pieceIndex]);
+            squareArray[j][ROW_8].setPiece(blackPieces[pieceIndex]);
+            pieceIndex++;
+        }
     }
+
+        
 
     public void storePieceImages() {
 
@@ -197,13 +237,6 @@ public class iChess extends WindowController {
           
         }
     }
-
-
-
-        
-
-
-
 
 
     /**
