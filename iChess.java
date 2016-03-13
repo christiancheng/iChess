@@ -32,6 +32,10 @@ public class iChess extends WindowController {
         "G", "H"};
     private static final String[] boardRanks = {"1", "2", "3", "4", "5", "6",
         "7", "8"};
+    private static final int ROW_1 = 0;
+    private static final int ROW_2 = 1;
+    private static final int ROW_7 = 6;
+    private static final int ROW_8 = 7;
     private static Square[][] squareArray = new
         Square[NUMBER_LINES][NUMBER_LINES];
 
@@ -40,7 +44,6 @@ public class iChess extends WindowController {
     private static final int NUM_UNIQUE_IMAGES = 12;
     private static final int NUM_TOTAL_PIECES = 32;
     private static final int PIECES_PER_ROW = 8;
-    private static final int NUM_KNIGHTS = 2;
 
     private static final int PAWN_INDEX = 0;
     private static final int KNIGHT_INDEX = 1;
@@ -123,21 +126,55 @@ public class iChess extends WindowController {
 
         // Set the pieces on the board, starting with Pawns
         for (int i = 0; i < PIECES_PER_ROW; i++) {
-            whitePieces[i] = new Pawn(WHITE, squareArray[i][1],
+            whitePieces[i] = new Pawn(WHITE, squareArray[i][ROW_2],
                     pieceImageArray[PAWN_INDEX], canvas);
-            blackPieces[i] = new Pawn(BLACK, squareArray[i][6],
+            blackPieces[i] = new Pawn(BLACK, squareArray[i][ROW_7],
                     pieceImageArray[PAWN_INDEX + BLACK_OFFSET], canvas);
         }
 
         // Set Rooks on the board
-        whitePieces[8] = new Rook(WHITE, squareArray[0][0],
+        whitePieces[8] = new Rook(WHITE, squareArray[0][ROW_1],
                 pieceImageArray[ROOK_INDEX], canvas);
-        whitePieces[15] = new Rook(WHITE, squareArray[7][0],
+        whitePieces[15] = new Rook(WHITE, squareArray[7][ROW_1],
                 pieceImageArray[ROOK_INDEX], canvas);
-        blackPieces[8] = new Rook(BLACK, squareArray[0][7],
+        blackPieces[8] = new Rook(BLACK, squareArray[0][ROW_8],
                 pieceImageArray[ROOK_INDEX + BLACK_OFFSET], canvas);
-        blackPieces[15] = new Rook(BLACK, squareArray[7][7],
+        blackPieces[15] = new Rook(BLACK, squareArray[7][ROW_8],
                 pieceImageArray[ROOK_INDEX + BLACK_OFFSET], canvas);
+
+        // Set Knights on the board
+        whitePieces[9] = new Knight(WHITE, squareArray[1][ROW_1],
+                pieceImageArray[KNIGHT_INDEX], canvas);
+        whitePieces[14] = new Knight(WHITE, squareArray[6][ROW_1],
+                pieceImageArray[KNIGHT_INDEX], canvas);
+        blackPieces[9] = new Knight(BLACK, squareArray[1][ROW_8],
+                pieceImageArray[KNIGHT_INDEX + BLACK_OFFSET], canvas);
+        blackPieces[14] = new Knight(BLACK, squareArray[6][ROW_8],
+                pieceImageArray[KNIGHT_INDEX + BLACK_OFFSET], canvas);
+
+        // Set Bishops on the board
+        whitePieces[10] = new Bishop(WHITE, squareArray[2][ROW_1],
+                pieceImageArray[BISHOP_INDEX], canvas);
+        whitePieces[13] = new Bishop(WHITE, squareArray[5][ROW_1],
+                pieceImageArray[BISHOP_INDEX], canvas);
+        blackPieces[10] = new Bishop(BLACK, squareArray[2][ROW_8],
+                pieceImageArray[BISHOP_INDEX + BLACK_OFFSET], canvas);
+        blackPieces[13] = new Bishop(BLACK, squareArray[5][ROW_8],
+                pieceImageArray[BISHOP_INDEX + BLACK_OFFSET], canvas);
+
+       
+        // Set Queens on the board
+        whitePieces[11] = new Queen(WHITE, squareArray[3][ROW_1],
+                pieceImageArray[QUEEN_INDEX], canvas);
+        blackPieces[11] = new Queen(BLACK, squareArray[3][ROW_8],
+                pieceImageArray[QUEEN_INDEX + BLACK_OFFSET], canvas);
+        
+        // Set Kings on the board
+        whitePieces[12] = new King(WHITE, squareArray[4][ROW_1],
+                pieceImageArray[KING_INDEX], canvas);
+        blackPieces[12] = new King(BLACK, squareArray[4][ROW_8],
+                pieceImageArray[KING_INDEX + BLACK_OFFSET], canvas);
+
 
 
 
