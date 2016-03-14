@@ -169,13 +169,15 @@ public class iChess extends WindowController implements MouseListener {
 
                 if (selectedSquare.contains(point)) {
 
-                    if (selectedSquare.equals(originSquare)) {
+                    if (originSquareSelected &&
+                            selectedSquare.equals(originSquare)) {
 
                         originSquare = null;
                         originSquareSelected = false;
                         selectedSquare.deselect();
 
-                    } else if (selectedSquare.equals(destSquare)) {
+                    } else if (destSquareSelected &&
+                            selectedSquare.equals(destSquare)) {
 
                         destSquare = null;
                         destSquareSelected = false;
@@ -184,13 +186,21 @@ public class iChess extends WindowController implements MouseListener {
 
                     } else if (selectedSquare.isOccupied()) {
 
-                        if (!(originSquare.getColor().equals(selectedColor))) {
-                            
+                        // If the selected square is of the person's team
+                        if (selectedColor.equals(currentPlayer)) {
 
-                        originSquare = selectedSquare;
-                        originSquareSelected = true;
-                        selectedSquare.select();
-                    
+                            if (originSquareSelected) originSquare.deselect();
+                            originSquare = selectedSquare;
+                            originSquareSelected = true;
+                            selectedSquare.select();
+
+                        } else {
+
+                            if (destSquareSelected) destSquare.deselect();
+                            destSquare = selectedSquare;
+                            destSquareSelected = true;
+                            selectedSquare.select();
+                        }
 
                     } else if (originSquareSelected) {
 
