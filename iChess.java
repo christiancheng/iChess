@@ -92,13 +92,15 @@ public class iChess extends WindowController {
 
         int currentFile = 0;
 
-        while (currentFile++ < NUMBER_LINES) {
+        while (currentFile < NUMBER_LINES) {
 
             for (int i = 0; i < NUMBER_LINES; i++) {
                 if ((squareArray[currentFile][i].getID()).equals(squareID)) {
                     return squareArray[currentFile][i];
                 }
             }
+
+            currentFile++;
         }
 
         return null;
@@ -148,6 +150,8 @@ public class iChess extends WindowController {
 
     public void setDefaultPieces() {
 
+        int pieceIndex;
+
         // Set the pieces on the board, starting with Pawns
         for (int i = 0; i < PIECES_PER_ROW; i++) {
             whitePieces[i] = new Pawn(WHITE, squareArray[i][ROW_2],
@@ -167,10 +171,6 @@ public class iChess extends WindowController {
                 pieceImageArray[ROOK_INDEX + BLACK_OFFSET], canvas);
         blackPieces[15] = new Rook(BLACK, squareArray[7][ROW_8],
                 pieceImageArray[ROOK_INDEX + BLACK_OFFSET], canvas);
-        squareArray[0][ROW_1].setPiece(whitePieces[8]);
-        squareArray[7][ROW_1].setPiece(whitePieces[15]);
-        squareArray[0][ROW_8].setPiece(blackPieces[8]);
-        squareArray[7][ROW_8].setPiece(blackPieces[15]);
 
         // Set Knights on the board
         whitePieces[9] = new Knight(WHITE, squareArray[1][ROW_1],
@@ -205,11 +205,7 @@ public class iChess extends WindowController {
         blackPieces[12] = new King(BLACK, squareArray[4][ROW_8],
                 pieceImageArray[KING_INDEX + BLACK_OFFSET], canvas);
 
-        // TODO
-        int pieceIndex = 8;
-        // Figure out which square to assign which piece 
-        // 0-8, 1-9, 2-10, 3-11, 4-12, 5-13, 6-14, 7-15
-
+        pieceIndex = 8;
 
         // Assign Pieces to each square
         for (int j = 0; j < 8; j++) {
@@ -217,6 +213,10 @@ public class iChess extends WindowController {
             squareArray[j][ROW_8].setPiece(blackPieces[pieceIndex]);
             pieceIndex++;
         }
+
+        System.out.println(whitePieces[1].getPossibleMoves(
+                    whitePieces[1].getSquare().getID(), WHITE));
+        System.out.println(getSquare("B3"));
 
     }
 

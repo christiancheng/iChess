@@ -68,7 +68,7 @@ public class Square implements MouseListener {
         // Indicate whether this Square was selected
         selected = squareRect.contains(point);
 
-
+        
     }
 
     public void setID(String idToSet) {

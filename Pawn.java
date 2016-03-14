@@ -58,19 +58,19 @@ public class Pawn implements Piece {
 
     public Square[] getPossibleMoves(String squareID, String pieceColor) {
 
-        char squareFile, squareRank;
+        String squareFile, squareRank;
         ArrayList<String> possibleMoveIds = new ArrayList<String>();
 
-        squareFile = squareID.charAt(0);
-        squareRank = squareID.charAt(1);
+        squareFile = squareID.substring(0, 1);
+        squareRank = squareID.substring(1, 2);
 
         if (pieceColor == WHITE) {
 
             // Should be upranking later
-            if (squareRank == '8') return null;
+            if (squareRank == "8") return null;
 
-            possibleMoveIds.add((squareFile + (char)((int)(squareRank)
-                            + 1)) + "");
+            possibleMoveIds.add(squareFile + Integer.parseInt(squareRank)
+                            + 1);
 
         }
 
