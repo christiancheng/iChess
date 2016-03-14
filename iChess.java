@@ -165,7 +165,6 @@ public class iChess extends WindowController implements MouseListener {
             for (int j = 0; j < squareArray.length; j++) {
 
                 selectedSquare = squareArray[i][j];
-                selectedColor = selectedSquare.getColor();
 
                 if (selectedSquare.contains(point)) {
 
@@ -181,10 +180,11 @@ public class iChess extends WindowController implements MouseListener {
 
                         destSquare = null;
                         destSquareSelected = false;
-                        selectedSquare.deselect();
-                    
+                        selectedSquare.deselect();                    
 
                     } else if (selectedSquare.isOccupied()) {
+
+                        selectedColor = selectedSquare.getPiece().getColor();
 
                         // If the selected square is of the person's team
                         if (selectedColor.equals(currentPlayer)) {
@@ -196,10 +196,13 @@ public class iChess extends WindowController implements MouseListener {
 
                         } else {
 
-                            if (destSquareSelected) destSquare.deselect();
-                            destSquare = selectedSquare;
-                            destSquareSelected = true;
-                            selectedSquare.select();
+                            if (originSquareSelected) {
+
+                                if (destSquareSelected) destSquare.deselect();
+                                destSquare = selectedSquare;
+                                destSquareSelected = true;
+                                selectedSquare.select();
+                            }
                         }
 
                     } else if (originSquareSelected) {
@@ -210,7 +213,10 @@ public class iChess extends WindowController implements MouseListener {
                     }
                 }
             }
-        }              
+        }
+
+        if (originSquareSelected) System.out.println(originSquare.getID());
+        if (destSquareSelected) System.out.println(destSquare.getID());
         
     }
 
@@ -324,5 +330,10 @@ public class iChess extends WindowController implements MouseListener {
 
         new Acme.MainFrame(new iChess(), args, CANVAS_WIDTH, CANVAS_HEIGHT);
     }
+
+    public void mouseClicked(MouseEvent evt) {}
+    public void mouseEntered(MouseEvent evt) {}
+    public void mouseExited(MouseEvent evt) {}
+    public void mouseReleased(MouseEvent evt) {}
 }
 // End of public class iChess

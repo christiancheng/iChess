@@ -1,0 +1,13 @@
+Square selection algorithm
+
+1. Checks if origin square was selected again. If it is selected again,
+    deselects the origin square.
+2. Checks if destination square was selected again. Same as above.
+3. If selected square is occupied:
+    If the square belongs to the current player:
+        Selects the square as origin square
+    If the square belongs to the opposing player:
+        If an origin square has been selected, selects the square as the
+        destination square.
+    - Selects the square if it is occupied and belongs to the current player
+

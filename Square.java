@@ -30,7 +30,6 @@ public class Square {
     {
         squareRect = new FilledRect(initLocation, SQUARE_WIDTH,
                 SQUARE_WIDTH, canvas);
-        canvas.addMouseListener(this);
         
         setLocation(initLocation);
 
@@ -99,7 +98,7 @@ public class Square {
 
     public void setPiece(Piece pieceToSet) {
         piece = pieceToSet;
-        if (piece) setOccupancy(true);
+        if (piece != null) setOccupancy(true);
     }
 
     /**
