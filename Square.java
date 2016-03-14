@@ -11,7 +11,7 @@ import java.awt.event.*;
  * Squares comprise the game board and keep track of their properties.
  */
 
-public class Square implements MouseListener {
+public class Square {
 
     // Dimensions
     private static final double SQUARE_WIDTH = 70;
@@ -38,6 +38,15 @@ public class Square implements MouseListener {
         else squareRect.setColor(Color.WHITE);
     }
 
+    public boolean contains(Location pt) {
+        return squareRect.contains(pt);
+    }
+
+    public void deselect() {
+
+        selected = false;
+    }
+
     public boolean equals(Square square) {
         return (location == square.getLocation()) ? true : false;
     }
@@ -48,27 +57,32 @@ public class Square implements MouseListener {
     
     public Location getLocation() {
         return location;
-    }
-
-    public boolean getOccupancy() {
-        return occupied;
-    }
+    }  
 
     public Piece getPiece() {
         return piece;
     }
 
+    public boolean isOccupied() {
+        return occupied;
+    }
+
+    /**
     public void mousePressed(MouseEvent evt) {
 
         // Get location of mouse press
         int evtX = evt.getX();
         int evtY = evt.getY();
-        Location point = new Location(evtX, evtY);
-
-        // Indicate whether this Square was selected
-        selected = squareRect.contains(point);
-
         
+        // Indicate whether this Square was selected
+        selected = contains(new Location(evtX, evtY));
+        
+    }
+    */
+
+    public void select() {
+
+        selected = true;
     }
 
     public void setID(String idToSet) {
@@ -85,11 +99,14 @@ public class Square implements MouseListener {
 
     public void setPiece(Piece pieceToSet) {
         piece = pieceToSet;
+        if (piece) setOccupancy(true);
     }
 
+    /**
     public void mouseClicked(MouseEvent evt) {}
     public void mouseEntered(MouseEvent evt) {}
     public void mouseExited(MouseEvent evt) {}
     public void mouseReleased(MouseEvent evt) {}
+    */
 
 }

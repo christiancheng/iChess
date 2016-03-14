@@ -9,7 +9,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-public class iChess extends WindowController {
+public class iChess extends WindowController implements MouseListener {
 
     // Dimensions
     private static final int CANVAS_WIDTH = 720;
@@ -38,6 +38,8 @@ public class iChess extends WindowController {
     private static final int ROW_8 = 7;
     private static Square[][] squareArray = new
         Square[NUMBER_LINES][NUMBER_LINES];
+    private Square originSquare, destSquare;
+    private boolean originSquareSelected, destSquareSelected;
 
     // Pieces
     private static final String WHITE = "white", BLACK = "black";
@@ -63,6 +65,8 @@ public class iChess extends WindowController {
      * On begin, draw the chessboard and side board.
      */
     public void begin() {
+
+        canvas.addMouseListener(this);
 
         // Draw the Chessboard and instantiate each Square
         drawBoard();
@@ -141,6 +145,61 @@ public class iChess extends WindowController {
             }
         }
     }
+
+    public void mousePressed(MouseEvent evt) {
+
+        Square selectedSquare;
+
+        // Get location of mouse press
+        int evtX = evt.getX();
+        int evtY = evt.getY();
+        Location point = new Location(evtX, evtY);
+
+        // Determine which square was selected
+        for (int i = 0; i < squareArray.length; i++) {
+
+            for (int j = 0; j < squareArray.length; j++) {
+
+                selectedSquare = squareArray[i][j];
+
+                if (selectedSquare.contains(point)) {
+
+                    if (selectedSquare.equals(originSquare)) {
+
+                        originSquare = null;
+                        originSquareSelected = false;
+                        selectedSquare.deselect();
+
+                    } else if (selectedSquare.equals(destSquare)) {
+
+                        destSquare = null;
+                        destSquareSelected = false;
+                        selectedSquare.deselect();
+                    
+
+                    } else if (selectedSquare.isOccupied()) {
+
+                        originSquare = selectedSquare;
+                        originSquareSelected = true;
+                        selectedSquare.select();
+                    
+
+                    } else if (originSquareSelected) {
+
+                        destSquare = selectedSquare;
+                        destSquareSelected = true;
+                        selectedSquare.select();
+                    }
+
+
+
+
+
+                    
+        
+    }
+
+
 
     public void setPieces() {
 
