@@ -17,6 +17,9 @@ public class iChess extends WindowController implements MouseListener {
     private static final int NUMBER_LINES = 8;
     private static final int BOARD_WIDTH = 560;
     private static final int SQUARE_WIDTH = BOARD_WIDTH / NUMBER_LINES;
+
+    // Teams
+    private String currentPlayer;
     
 
     // GUI components
@@ -149,6 +152,7 @@ public class iChess extends WindowController implements MouseListener {
     public void mousePressed(MouseEvent evt) {
 
         Square selectedSquare;
+        String selectedColor;
 
         // Get location of mouse press
         int evtX = evt.getX();
@@ -161,6 +165,7 @@ public class iChess extends WindowController implements MouseListener {
             for (int j = 0; j < squareArray.length; j++) {
 
                 selectedSquare = squareArray[i][j];
+                selectedColor = selectedSquare.getColor();
 
                 if (selectedSquare.contains(point)) {
 
@@ -179,6 +184,9 @@ public class iChess extends WindowController implements MouseListener {
 
                     } else if (selectedSquare.isOccupied()) {
 
+                        if (!(originSquare.getColor().equals(selectedColor))) {
+                            
+
                         originSquare = selectedSquare;
                         originSquareSelected = true;
                         selectedSquare.select();
@@ -190,12 +198,9 @@ public class iChess extends WindowController implements MouseListener {
                         destSquareSelected = true;
                         selectedSquare.select();
                     }
-
-
-
-
-
-                    
+                }
+            }
+        }              
         
     }
 
