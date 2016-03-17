@@ -159,6 +159,8 @@ public class iChess extends WindowController implements MouseListener {
         int evtY = evt.getY();
         Location point = new Location(evtX, evtY);
 
+        // TODO Working here
+
         // Determine which square was selected
         for (int i = 0; i < squareArray.length; i++) {
 

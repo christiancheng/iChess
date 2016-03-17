@@ -10,4 +10,7 @@ Square selection algorithm
         If an origin square has been selected, selects the square as the
         destination square.
     - Selects the square if it is occupied and belongs to the current player
+4. If the selected square is unoccupied:
+    If an origin square has been selected, select the square as the destination
+    square.
 
