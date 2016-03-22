@@ -206,11 +206,9 @@ public class iChess extends WindowController implements MouseListener {
                         } else {
 
                             destSquare = selectedSquare;
-                            destSquareSelected = true;
+                            destSquareSelected = true; 
                         }
-
-
-
+                    }
                                     
             }
         }
