@@ -170,50 +170,48 @@ public class iChess extends WindowController implements MouseListener {
 
                 if (selectedSquare.contains(point)) {
 
-                    if (originSquareSelected &&
-                            selectedSquare.equals(originSquare)) {
+                    // 1: Origin square has not been selected. Set the square to
+                    // the origin square if it contains the current player's
+                    // piece. Otherwise, do not do anything.
 
-                        originSquare = null;
-                        originSquareSelected = false;
-                        selectedSquare.deselect();
+                    // 2: Origin square has been selected. Set the square to
+                    // the origin square if it contains the current player's
+                    // piece. Deselect the origin square if it is the same
+                    // square as before. Set the square to the destination
+                    // square if it is any other square. THen trigger the
+                    // move selection
 
-                    } else if (destSquareSelected &&
-                            selectedSquare.equals(destSquare)) {
+                    if (!originSquareSelected) {
 
-                        destSquare = null;
-                        destSquareSelected = false;
-                        selectedSquare.deselect();                    
-
-                    } else if (selectedSquare.isOccupied()) {
+                        originSquare = selectedSquare;
+                        originSquareSelected = true;
+                        selectedSquare.select();
+                    
+                    } else {
 
                         selectedColor = selectedSquare.getPiece().getColor();
 
-                        // If the selected square is of the person's team
-                        if (selectedColor.equals(currentPlayer)) {
+                        if (selectedSquare.equals(originSquare)) {
 
-                            if (originSquareSelected) originSquare.deselect();
+                            selectedSquare.deselect();
+                            originSquare = null;
+                            originSquareSelected = false;
+
+                        } else if (selectedColor.equals(currentPlayer)) {
+
+                            originSquare.deselect();
                             originSquare = selectedSquare;
-                            originSquareSelected = true;
                             selectedSquare.select();
 
                         } else {
 
-                            if (originSquareSelected) {
-
-                                if (destSquareSelected) destSquare.deselect();
-                                destSquare = selectedSquare;
-                                destSquareSelected = true;
-                                selectedSquare.select();
-                            }
+                            destSquare = selectedSquare;
+                            destSquareSelected = true;
                         }
 
-                    } else if (originSquareSelected) {
 
-                        destSquare = selectedSquare;
-                        destSquareSelected = true;
-                        selectedSquare.select();
-                    }
-                }
+
+                                    
             }
         }
 
