@@ -153,6 +153,8 @@ public class iChess extends WindowController implements MouseListener {
 
         Square selectedSquare;
         String selectedColor;
+        boolean occupied = false;
+        boolean sameColor = false;
 
         // Get location of mouse press
         int evtX = evt.getX();
@@ -167,7 +169,7 @@ public class iChess extends WindowController implements MouseListener {
             for (int j = 0; j < squareArray.length; j++) {
 
                 selectedSquare = squareArray[i][j];
-
+                
                 if (selectedSquare.contains(point)) {
 
                     // 1: Origin square has not been selected. Set the square to
@@ -181,13 +183,28 @@ public class iChess extends WindowController implements MouseListener {
                     // square if it is any other square. THen trigger the
                     // move selection
 
+                    occupied = selectedSquare.isOccupied();
+
+                    if (occupied) {
+                        selectedColor = selectedSquare.getPiece().getColor();
+                        sameColor = selectedColor.equals(currentPlayer);
+                    }
+
+                    // Origin square has not been selected
                     if (!originSquareSelected) {
 
-                        originSquare = selectedSquare;
-                        originSquareSelected = true;
-                        selectedSquare.select();
+                        // If the selected square is occupied, set origin
+                        if (occupied) {
+                            originSquare = selectedSquare;
+                            originSquareSelected = true;
+                            selectedSquare.select();
+                        }
                     
+                    // Origin square has been selected
                     } else {
+
+                        // If the selected square is occupied, proceed
+                        if (occupied) {
 
                         selectedColor = selectedSquare.getPiece().getColor();
 
